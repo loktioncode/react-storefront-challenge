@@ -1,4 +1,4 @@
-import { Product } from "@/app/utils";
+import { Product } from "@/utils";
 
 
   const API_URL = "https://fakestoreapi.com/products";
