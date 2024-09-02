@@ -1,16 +1,19 @@
-'use client'
+'use client';
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { RootState } from "../store";
 import StoreCard from "../components/StoreCard";
 import NavBar from "../components/NavBar";
 import { Product } from "@/utils";
 import { fetchProducts } from "@/slices/products";
+import { toggleFavorite } from "@/slices/favoritesSlice"; // Import the favorites slice
 
 const StorePage = () => {
   const dispatch = useDispatch();
   const { all_products, loading, error } = useSelector((state: RootState) => state.products);
-  const [filteredProducts, setFilteredProducts] = useState(all_products);
+  const favorites = useSelector((state: RootState) => state.favorites.items);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     dispatch(fetchProducts() as any);
@@ -30,6 +33,10 @@ const StorePage = () => {
     setFilteredProducts(sortedProducts);
   };
 
+  const handleFavoriteToggle = (productId: number) => {
+    dispatch(toggleFavorite(productId));
+  };
+
   if (loading === "pending") {
     return <div>Loading...</div>;
   }
@@ -46,9 +53,14 @@ const StorePage = () => {
         <button onClick={() => handleFilter("a-z")}>A-Z</button>
         {/* Add category filter buttons or dropdowns here */}
       </div>
-      <div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "20px", marginTop: "20px" }}>
         {filteredProducts?.map((product: Product) => (
-          <StoreCard key={product.id} product={product} />
+          <StoreCard 
+            key={product.id} 
+            product={product} 
+            isFavorite={favorites.includes(product.id)}
+            onFavoriteToggle={() => handleFavoriteToggle(product.id)} 
+          />
         ))}
       </div>
     </div>

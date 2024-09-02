@@ -1,9 +1,8 @@
 'use client'
 import { useSelector, useDispatch } from "react-redux";
-
-import styles from "@/components/CartPage.module.css"; // Create this CSS module
-import { RootState } from "@/store/store";
+import { RootState } from "@/store";
 import { removeFromCart, updateQuantity } from "@/slices/cartSlice";
+import styles from "@/components/CartPage.module.css";
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ const CartPage = () => {
   };
 
   const handleQuantityChange = (id: number, quantity: number) => {
-    if (quantity > 0) {
+    if (quantity >= 1) {
       dispatch(updateQuantity({ id, quantity }));
     }
   };
@@ -33,7 +32,9 @@ const CartPage = () => {
                 <h2>{item.title}</h2>
                 <p>${item.price}</p>
                 <div className={styles.quantityControl}>
-                  <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
+                  <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
+                    -
+                  </button>
                   <span>{item.quantity}</span>
                   <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
                 </div>
@@ -50,3 +51,4 @@ const CartPage = () => {
 };
 
 export default CartPage;
+

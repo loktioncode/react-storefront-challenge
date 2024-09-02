@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .sidebar {
+    width: 250px;
+    padding-right: 20px;
+  }
+  
+  .mainContent {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .productCard {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: center;
+  }
+  
+  .productCard img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .productInfo {
+    margin-top: 10px;
+  }
+  
+  .productPrice {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .favoriteIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #ff6666;
+    font-size: 1.5rem;
+  }
+  
