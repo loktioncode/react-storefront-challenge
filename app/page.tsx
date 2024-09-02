@@ -53,7 +53,12 @@ const StorePage = () => {
         <button onClick={() => handleFilter("a-z")}>A-Z</button>
         {/* Add category filter buttons or dropdowns here */}
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "20px", marginTop: "20px" }}>
+      <div style={{ 
+          display: "grid", 
+          gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", 
+          gap: "20px", 
+          marginTop: "20px" 
+        }}>
         {filteredProducts?.map((product: Product) => (
           <StoreCard 
             key={product.id} 
@@ -68,4 +73,3 @@ const StorePage = () => {
 };
 
 export default StorePage;
-
