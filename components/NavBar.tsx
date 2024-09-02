@@ -24,7 +24,7 @@ const NavBar = () => {
           <Link href="/">BlackMarket</Link>
         </div>
         <div className={styles.navLinks}>
-          <Link href="/favorites">Favorites</Link>
+          <Link href="/favs">Favorites</Link>
           <div className={styles.cart} onClick={toggleCart}>
             <FaShoppingCart />
             {cartItemCount > 0 && <span className={styles.cartCount}>{cartItemCount}</span>}
