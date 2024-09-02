@@ -1,0 +1,53 @@
+.cartPage {
+    padding: 2rem;
+  }
+  
+  .cartList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cartItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+  }
+  
+  .itemImage {
+    max-width: 100px;
+    margin-right: 1rem;
+  }
+  
+  .itemDetails {
+    flex-grow: 1;
+  }
+  
+  .quantityControl {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantityControl button {
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .quantityControl span {
+    margin: 0 1rem;
+  }
+  
+  .removeButton {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  

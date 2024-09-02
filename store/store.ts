@@ -1,14 +1,30 @@
-// store.ts
-
 import { configureStore } from "@reduxjs/toolkit";
-import fetchProductsReducer  from "../slices/products";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import { combineReducers } from "redux";
+import fetchProductsReducer from "@/slices/products";
+import cartReducer from "@/slices/cartSlice";
+import { PersistPartial } from "redux-persist/es/persistReducer";
 
-export const store = configureStore({
-  reducer: {
-    products: fetchProductsReducer, 
-  },
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const rootReducer = combineReducers({
+  products: fetchProductsReducer,
+  cart: cartReducer,
 });
 
-// Exporting types for RootState and AppDispatch
-export type RootState = ReturnType<typeof store.getState>;
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+});
+
+export const persistor = persistStore(store);
+
+// Adjust RootState to include PersistPartial
+export type RootState = ReturnType<typeof rootReducer> & PersistPartial;
 export type AppDispatch = typeof store.dispatch;
+

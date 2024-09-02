@@ -1,95 +1,59 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import StoreCard from "../components/StoreCard";
+import NavBar from "../components/NavBar";
+import { Product } from "@/utils";
+import { fetchProducts } from "@/slices/products";
 
-export default function Home() {
+const StorePage = () => {
+  const dispatch = useDispatch();
+  const { all_products, loading, error } = useSelector((state: RootState) => state.products);
+  const [filteredProducts, setFilteredProducts] = useState(all_products);
+
+  useEffect(() => {
+    dispatch(fetchProducts() as any);
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredProducts(all_products);
+  }, [all_products]);
+
+  const handleFilter = (criteria: string) => {
+    let sortedProducts = [...all_products];
+    if (criteria === "price-high-low") {
+      sortedProducts.sort((a, b) => b.price - a.price);
+    } else if (criteria === "a-z") {
+      sortedProducts.sort((a, b) => a.title.localeCompare(b.title));
+    }
+    setFilteredProducts(sortedProducts);
+  };
+
+  if (loading === "pending") {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div>
+      <NavBar />
+      <div>
+        <button onClick={() => handleFilter("price-high-low")}>Price: High to Low</button>
+        <button onClick={() => handleFilter("a-z")}>A-Z</button>
+        {/* Add category filter buttons or dropdowns here */}
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div>
+        {filteredProducts?.map((product: Product) => (
+          <StoreCard key={product.id} product={product} />
+        ))}
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
-}
+};
+
+export default StorePage;
+
