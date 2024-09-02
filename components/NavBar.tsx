@@ -4,7 +4,8 @@ import styles from "./NavBar.module.css";
 const NavBar = () => {
   return (
     <nav className={styles.navbar}>
-      <Link href="/">Home</Link>
+       <Link href="/">Home</Link>
+      <Link href="/favs">Favorites</Link> 
       <Link href="/cart">Cart</Link>
     </nav>
   );

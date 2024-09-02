@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import { removeFromCart, updateQuantity } from "@/slices/cartSlice";
 import styles from "@/components/CartPage.module.css";
+import NavBar from "@/components/NavBar";
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const CartPage = () => {
 
   return (
     <div className={styles.cartPage}>
+      <NavBar />
       <h1>Your Cart</h1>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
