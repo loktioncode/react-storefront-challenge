@@ -1,0 +1,37 @@
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.leftFilters,
+.rightFilters {
+  display: flex;
+  align-items: center;
+}
+
+select.filterdropdown {
+  padding: 8px;
+  font-size: 1rem;
+  margin-right: 20px;
+}
+
+.rightFilters button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  margin-left: 20px; 
+}
+
+button.AzFilter, button.HlFilter {
+  background-color: #011933;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.AzFilter:hover, button.HlFilter:hover {
+  background-color: #005bb5;
+}
