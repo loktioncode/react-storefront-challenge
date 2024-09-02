@@ -38,7 +38,10 @@
   cursor: pointer;
   color: #ff6666;
   font-size: 1.5rem;
+  transition: box-shadow 0.3s ease;
 }
+
+
 
 .priceCircle {
   position: absolute;
