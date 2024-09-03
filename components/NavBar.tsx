@@ -24,7 +24,7 @@ const NavBar = () => {
         </div>
         <div className={styles.navLinks}>
           <Link href="/favs">Favorites</Link>
-          <Link href="/cart">CartPage</Link>
+          <Link href="/cart">Page 2</Link>
 
           <div className={styles.cart} onClick={toggleCart}>
             <FaShoppingCart />
