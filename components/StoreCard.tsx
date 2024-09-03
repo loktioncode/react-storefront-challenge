@@ -4,6 +4,8 @@ import { addToCart } from "@/slices/cartSlice";
 import styles from "@/styles/StoreCard.module.css";
 import { Product } from "@/utils";
 import { FaStar, FaStarHalfAlt, FaRegStar,  FaHeart, FaRegHeart } from "react-icons/fa"; 
+import toast from 'react-hot-toast';
+
 
 
 interface StoreCardProps {
@@ -17,7 +19,7 @@ const StoreCard: React.FC<StoreCardProps> = ({ product, isFavorite, onFavoriteTo
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
-    alert("added to cart!")
+    toast.success(`${product.title} Added to Card!`)
   };
 
   return (
@@ -43,6 +45,7 @@ const StoreCard: React.FC<StoreCardProps> = ({ product, isFavorite, onFavoriteTo
       <button onClick={handleAddToCart} className={styles.addToCartButton}>
         Add to Cart
       </button>
+      
     </div>
   );
 };

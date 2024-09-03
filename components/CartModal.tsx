@@ -4,6 +4,7 @@ import { RootState } from "@/store";
 import { removeFromCart, updateQuantity } from "@/slices/cartSlice";
 import styles from "@/styles/CartModal.module.css";
 import { FaTrashAlt } from "react-icons/fa";
+import toast from 'react-hot-toast';
 
 interface CartModalProps {
   isOpen: boolean;
@@ -15,7 +16,9 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   const handleRemove = (id: number) => {
+    const product = cartItems.find(item => item.id === id);
     dispatch(removeFromCart(id));
+    toast.success(`${product?.title} Removed from Card!`)
   };
 
   const handleQuantityChange = (id: number, quantity: number) => {
