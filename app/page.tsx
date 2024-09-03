@@ -17,7 +17,7 @@ const StorePage = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [sortOption, setSortOption] = useState<string>('a-z'); 
+  const [sortOption, setSortOption] = useState<string>('a-z');
 
   useEffect(() => {
     dispatch(fetchProducts() as any);
@@ -31,10 +31,8 @@ const StorePage = () => {
     setCategories(uniqueCategories);
   }, [all_products]);
 
-  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const criteria = event.target.value;
-    setSortOption(criteria);
-    let sortedProducts = [...all_products];
+  const sortProducts = (products: Product[], criteria: string) => {
+    let sortedProducts = [...products];
 
     if (criteria === "price-high-low") {
       sortedProducts.sort((a, b) => b.price - a.price);
@@ -46,19 +44,33 @@ const StorePage = () => {
       sortedProducts.sort((a, b) => b.title.localeCompare(a.title));
     }
 
+    return sortedProducts;
+  };
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const criteria = event.target.value;
+    setSortOption(criteria);
+
+    let filteredByCategory = all_products;
+    if (selectedCategory) {
+      filteredByCategory = all_products.filter(product => product.category === selectedCategory);
+    }
+
+    const sortedProducts = sortProducts(filteredByCategory, criteria);
     setFilteredProducts(sortedProducts);
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const category = event.target.value;
     setSelectedCategory(category);
-    
+
+    let filteredByCategory = all_products;
     if (category) {
-      const filteredByCategory = all_products.filter(product => product.category === category);
-      setFilteredProducts(filteredByCategory);
-    } else {
-      setFilteredProducts(all_products);
+      filteredByCategory = all_products.filter(product => product.category === category);
     }
+
+    const sortedProducts = sortProducts(filteredByCategory, sortOption);
+    setFilteredProducts(sortedProducts);
   };
 
   const handleFavoriteToggle = (productId: number) => {
@@ -78,17 +90,17 @@ const StorePage = () => {
       <NavBar />
       <div className={styles.filterContainer}>
         <div className={styles.leftFilters}>
-        <select value={selectedCategory} onChange={handleCategoryChange} className={styles.filterdropdown}>
-  <option value="">All Categories</option>
-  {categories.map((category, index) => (
-    <option key={index} value={category}>
-      {category}
-    </option>
-  ))}
-</select>
+          <select value={selectedCategory} onChange={handleCategoryChange} className={styles.filterdropdown}>
+            <option value="">All Categories</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={styles.rightFilters}>
-          <select value={sortOption} onChange={handleSortChange}  className={styles.filterdropdown}>
+          <select value={sortOption} onChange={handleSortChange} className={styles.filterdropdown}>
             <option value="a-z">Sort by: A-Z</option>
             <option value="z-a">Sort by: Z-A</option>
             <option value="price-high-low">Sort by: Price High to Low</option>
@@ -116,4 +128,5 @@ const StorePage = () => {
 };
 
 export default StorePage;
+
 
