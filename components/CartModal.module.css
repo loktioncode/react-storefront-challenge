@@ -62,7 +62,7 @@
 .quantityButton {
   margin: 0 5px;
   padding: 5px 10px;
-  background-color: #0070f3;
+  background-color: #000f20;
   color: white;
   border: none;
   cursor: pointer;
@@ -98,7 +98,7 @@
 }
 
 .closeButton {
-  background-color: #0070f3;
+  background-color: #000f20;
   color: white;
   padding: 0.5rem 1rem;
   border: none;
