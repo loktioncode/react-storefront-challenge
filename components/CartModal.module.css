@@ -1,0 +1,110 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  color: #333;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh; /* Max height to allow scrolling */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.cartList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: relative; /* Ensure the delete button is positioned relative to the cart item */
+}
+
+.itemImage {
+  max-width: 80px;
+  margin-right: 1rem;
+  border-radius: 8px;
+}
+
+.itemDetails {
+  flex-grow: 1;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.quantityButton {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quantityButton:hover {
+  background-color: #005bb5;
+}
+
+.quantityButton:active {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.removeButton {
+  position: absolute;
+  top: 10px; /* Position the button at the top */
+  right: 10px; /* Align it to the right */
+  padding: 5px 10px;
+  background-color: transparent; 
+  color: red;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeButton:hover {
+  color: darkred;
+}
+
+.closeButton {
+  background-color: #0070f3;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+}

@@ -7,13 +7,17 @@ import StoreCard from "../components/StoreCard";
 import NavBar from "../components/NavBar";
 import { Product } from "@/utils";
 import { fetchProducts } from "@/slices/products";
-import { toggleFavorite } from "@/slices/favoritesSlice"; // Import the favorites slice
+import { toggleFavorite } from "@/slices/favoritesSlice";
+import styles from "../components/StorePage.module.css";
 
 const StorePage = () => {
   const dispatch = useDispatch();
   const { all_products, loading, error } = useSelector((state: RootState) => state.products);
   const favorites = useSelector((state: RootState) => state.favorites.items);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [sortOption, setSortOption] = useState<string>('a-z'); 
 
   useEffect(() => {
     dispatch(fetchProducts() as any);
@@ -21,16 +25,40 @@ const StorePage = () => {
 
   useEffect(() => {
     setFilteredProducts(all_products);
+
+    // Extract categories from products
+    const uniqueCategories = Array.from(new Set(all_products.map(product => product.category)));
+    setCategories(uniqueCategories);
   }, [all_products]);
 
-  const handleFilter = (criteria: string) => {
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const criteria = event.target.value;
+    setSortOption(criteria);
     let sortedProducts = [...all_products];
+
     if (criteria === "price-high-low") {
       sortedProducts.sort((a, b) => b.price - a.price);
+    } else if (criteria === "price-low-high") {
+      sortedProducts.sort((a, b) => a.price - b.price);
     } else if (criteria === "a-z") {
       sortedProducts.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (criteria === "z-a") {
+      sortedProducts.sort((a, b) => b.title.localeCompare(a.title));
     }
+
     setFilteredProducts(sortedProducts);
+  };
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const category = event.target.value;
+    setSelectedCategory(category);
+    
+    if (category) {
+      const filteredByCategory = all_products.filter(product => product.category === category);
+      setFilteredProducts(filteredByCategory);
+    } else {
+      setFilteredProducts(all_products);
+    }
   };
 
   const handleFavoriteToggle = (productId: number) => {
@@ -48,10 +76,25 @@ const StorePage = () => {
   return (
     <div>
       <NavBar />
-      <div>
-        <button onClick={() => handleFilter("price-high-low")}>Price: High to Low</button>
-        <button onClick={() => handleFilter("a-z")}>A-Z</button>
-        {/* Add category filter buttons or dropdowns here */}
+      <div className={styles.filterContainer}>
+        <div className={styles.leftFilters}>
+        <select value={selectedCategory} onChange={handleCategoryChange} className={styles.filterdropdown}>
+  <option value="">All Categories</option>
+  {categories.map((category, index) => (
+    <option key={index} value={category}>
+      {category}
+    </option>
+  ))}
+</select>
+        </div>
+        <div className={styles.rightFilters}>
+          <select value={sortOption} onChange={handleSortChange}  className={styles.filterdropdown}>
+            <option value="a-z">Sort by: A-Z</option>
+            <option value="z-a">Sort by: Z-A</option>
+            <option value="price-high-low">Sort by: Price High to Low</option>
+            <option value="price-low-high">Sort by: Price Low to High</option>
+          </select>
+        </div>
       </div>
       <div style={{ 
           display: "grid", 
@@ -73,3 +116,4 @@ const StorePage = () => {
 };
 
 export default StorePage;
+
