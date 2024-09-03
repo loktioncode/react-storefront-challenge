@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "@/store";
 import { removeFromCart, updateQuantity } from "@/slices/cartSlice";
-import styles from "./CartModal.module.css";
+import styles from "@/styles/CartModal.module.css";
 import { FaTrashAlt } from "react-icons/fa";
 
 interface CartModalProps {

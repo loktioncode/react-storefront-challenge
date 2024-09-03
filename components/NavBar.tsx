@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "@/store";
 import CartModal from "./CartModal";
-import styles from "./NavBar.module.css";
+import styles from "@/styles/NavBar.module.css";
 import { FaShoppingCart } from "react-icons/fa";
 
 const NavBar = () => {

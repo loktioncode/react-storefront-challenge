@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import { removeFromCart, updateQuantity } from "@/slices/cartSlice";
-import styles from "@/components/CartPage.module.css";
+import styles from "@/styles/CartPage.module.css";
 import NavBar from "@/components/NavBar";
 
 const CartPage = () => {

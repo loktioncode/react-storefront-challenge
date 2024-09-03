@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
-import StoreCard from "../components/StoreCard";
-import NavBar from "../components/NavBar";
+import { RootState } from "@/store";
+import StoreCard from "@/components/StoreCard";
+import NavBar from "@/components/NavBar";
 import { Product } from "@/utils";
 import { fetchProducts } from "@/slices/products";
 import { toggleFavorite } from "@/slices/favoritesSlice";
-import styles from "../components/StorePage.module.css";
+import styles from "@/styles/StorePage.module.css";
 
 const StorePage = () => {
   const dispatch = useDispatch();

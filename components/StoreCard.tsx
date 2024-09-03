@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/slices/cartSlice";
-import styles from "./StoreCard.module.css";
+import styles from "@/styles/StoreCard.module.css";
 import { Product } from "@/utils";
 import { FaStar, FaStarHalfAlt, FaRegStar,  FaHeart, FaRegHeart } from "react-icons/fa"; 
 
@@ -27,7 +27,7 @@ const StoreCard: React.FC<StoreCardProps> = ({ product, isFavorite, onFavoriteTo
         <div className={styles.favoriteIcon} onClick={onFavoriteToggle}>
           {isFavorite ? <FaHeart color="#ff0000" /> : <FaRegHeart color="#000f20" />}
         </div>
-        <div className={styles.priceCircle}>${product.price}</div> {/* Price in top-right corner */}
+        <div className={styles.priceCircle}>${product.price}</div> 
       </div>
       <div className={styles.productInfo}>
         <h4>{product.title}</h4>
