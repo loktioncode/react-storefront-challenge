@@ -17,7 +17,7 @@ const StorePage = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [sortOption, setSortOption] = useState<string>('a-z'); // Track the current sort option
+  const [sortOption, setSortOption] = useState<string>('a-z'); 
 
   useEffect(() => {
     dispatch(fetchProducts() as any);
@@ -78,17 +78,17 @@ const StorePage = () => {
       <NavBar />
       <div className={styles.filterContainer}>
         <div className={styles.leftFilters}>
-          <select value={selectedCategory} onChange={handleCategoryChange} className="filterdropdown">
-            <option value="">All Categories</option>
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+        <select value={selectedCategory} onChange={handleCategoryChange} className={styles.filterdropdown}>
+  <option value="">All Categories</option>
+  {categories.map((category, index) => (
+    <option key={index} value={category}>
+      {category}
+    </option>
+  ))}
+</select>
         </div>
         <div className={styles.rightFilters}>
-          <select value={sortOption} onChange={handleSortChange} className="filterdropdown">
+          <select value={sortOption} onChange={handleSortChange}  className={styles.filterdropdown}>
             <option value="a-z">Sort by: A-Z</option>
             <option value="z-a">Sort by: Z-A</option>
             <option value="price-high-low">Sort by: Price High to Low</option>

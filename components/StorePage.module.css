@@ -11,27 +11,21 @@
   align-items: center;
 }
 
-select.filterdropdown {
-  padding: 8px;
+.filterdropdown {
+margin-left: 10px;
+margin-right: 10px;
+
+  padding: 10px 15px;
   font-size: 1rem;
-  margin-right: 20px;
+
 }
 
-.rightFilters button {
-  padding: 8px 16px;
-  font-size: 1rem;
-  margin-left: 20px; 
+.filterdropdown:hover {
+  border-color: #323232;
 }
 
-button.AzFilter, button.HlFilter {
-  background-color: #011933;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.filterdropdown:focus {
+  border-color: #595959;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.2);
 }
 
-button.AzFilter:hover, button.HlFilter:hover {
-  background-color: #005bb5;
-}

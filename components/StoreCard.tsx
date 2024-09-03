@@ -17,6 +17,7 @@ const StoreCard: React.FC<StoreCardProps> = ({ product, isFavorite, onFavoriteTo
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
+    alert("added to cart!")
   };
 
   return (

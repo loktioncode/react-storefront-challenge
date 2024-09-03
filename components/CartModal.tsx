@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 import { removeFromCart, updateQuantity } from "@/slices/cartSlice";
 import styles from "./CartModal.module.css";
+import { FaTrashAlt } from "react-icons/fa";
 
 interface CartModalProps {
   isOpen: boolean;
@@ -30,8 +31,13 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <h2>Your Cart</h2>
         {cartItems.length === 0 ? (
-          <p>Your cart is empty.</p>
+
+          <>
+            <p>Your cart is empty.</p>
+            <button onClick={onClose} className={styles.closeButton}>Close</button>
+          </>
         ) : (
+          <>
           <ul className={styles.cartList}>
             {cartItems.map((item) => (
               <li key={item.id} className={styles.cartItem}>
@@ -40,28 +46,32 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                   <h3>{item.title}</h3>
                   <p>${item.price}</p>
                   <div className={styles.quantityControl}>
-                    <button 
-                      onClick={() => handleQuantityChange(item.id, item.quantity - 1)} 
+                    <button
+                      onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
                       className={styles.quantityButton}
                     >-</button>
                     <span>{item.quantity}</span>
-                    <button 
-                      onClick={() => handleQuantityChange(item.id, item.quantity + 1)} 
+                    <button
+                      onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
                       className={styles.quantityButton}
                     >+</button>
                   </div>
-                  <button 
-                    onClick={() => handleRemove(item.id)} 
+                  <button
+                    onClick={() => handleRemove(item.id)}
                     className={styles.removeButton}
                   >
-                    Remove
+                    <FaTrashAlt />
                   </button>
                 </div>
               </li>
             ))}
           </ul>
+            <button onClick={onClose} className={styles.closeButton}>Checkout</button>
+          </>
+          
+          
         )}
-        <button onClick={onClose} className={styles.closeButton}>Close</button>
+      
       </div>
     </div>
   );

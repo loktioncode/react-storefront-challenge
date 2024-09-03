@@ -21,7 +21,7 @@ const NavBar = () => {
     <>
       <nav className={styles.navbar}>
         <div className={styles.logo}>
-          <Link href="/">BlackMarket</Link>
+          <Link href="/">~</Link>
         </div>
         <div className={styles.navLinks}>
           <Link href="/favs">Favorites</Link>
