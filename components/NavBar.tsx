@@ -32,7 +32,7 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
-      <CartModal isOpen={isCartOpen} onClose={toggleCart} /> {/* Render CartModal */}
+      <CartModal isOpen={isCartOpen} onClose={toggleCart} /> 
     </>
   );
 };
